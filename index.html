@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>UWONG | University of Wong</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="UWONG（University of Wong）官方网站首页">
+  <meta name="keywords" content="UWONG, University of Wong, 王氏大学, 学校官网, 大学官网, admissions, university">
+  <style>
+    :root {
+      --bg: #f5f5f7;
+      --bg-card: #ffffff;
+      --accent: #111827;
+      --accent-soft: #4b5563;
+      --border: #e5e7eb;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --link: #2563eb;
+      --link-hover: #1d4ed8;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.08);
+      --radius-lg: 18px;
+      --radius-pill: 999px;
+      --transition: 0.2s ease;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI",
+        system-ui, -sans-serif;
+      background: radial-gradient(circle at top, #e5e7eb 0, #f9fafb 45%, #f3f4f6 100%);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+    a {
+      color: var(--link);
+      text-decoration: none;
+      transition: color var(--transition), opacity var(--transition);
+    }
+    a:hover {
+      color: var(--link-hover);
+    }
+    img {
+      max-width: 100%;
+      display: block;
+    }
+    .navbar-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(
+        to bottom,
+        rgba(248, 250, 252, 0.98),
+        rgba(248, 250, 252, 0.9),
+        rgba(248, 250, 252, 0.75)
+      );
+      border-bottom: 1px solid rgba(209, 213, 219, 0.5);
+    }
+    .navbar {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .logo-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 11px;
+      background: radial-gradient(circle at 30% 20%, #fee2e2, #bfdbfe);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.06em;
+      color: #111827;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.16);
+    }
+    .nav-title-main {
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .nav-title-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      font-size: 0.85rem;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+    }
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+    .nav-cta {
+      padding: 0.45rem 0.95rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(31, 41, 55, 0.12);
+      background: #111827;
+      color: #f9fafb !important;
+      font-size: 0.8rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.35);
+    }
+    .nav-cta span {
+      font-size: 1rem;
+      line-height: 0;
+    }
+    .nav-cta:hover {
+      opacity: 0.92;
+    }
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 3rem;
+    }
+    .page-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
+      gap: 1.75rem;
+      margin-top: 1.5rem;
+      align-items: flex-start;
+    }
+    @media (max-width: 900px) {
+      .page-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .navbar {
+        flex-wrap: wrap;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+    .card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 1.6rem 1.6rem 1.5rem;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(229, 231, 235, 0.9);
+    }
+    .card + .card {
+      margin-top: 1.1rem;
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.8rem;
+    }
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+    .card-tagline {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .pill {
+      padding: 0.18rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: #4b5563;
+      background: linear-gradient(
+        to right,
+        rgba(248, 250, 252, 0.95),
+        rgba(241, 245, 249, 0.9)
+      );
+      white-space: nowrap;
+    }
+    .hero-badge-row {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .hero-badge-main {
+      padding: 0.22rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      background: rgba(15, 23, 42, 0.04);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #22c55e, #16a34a);
+      box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.18);
+    }
+    .hero-title-cn {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.2rem;
+    }
+    .hero-title-en {
+      font-size: 1rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--accent-soft);
+      margin-bottom: 0.85rem;
+    }
+    .hero-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 30rem;
+      margin-bottom: 1.2rem;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .hero-btn-primary {
+      padding: 0.6rem 1.3rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      border: none;
+      outline: none;
+      background: #111827;
+      color: #f9fafb;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      cursor: pointer;
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.38);
+      transition: transform var(--transition), box-shadow var(--transition),
+        opacity var(--transition);
+    }
+    .hero-btn-primary:hover {
+      transform: translateY(-1px);
+      opacity: 0.97;
+      box-shadow: 0 18px 48px rgba(15, 23, 42, 0.44);
+    }
+    .hero-btn-secondary {
+      padding: 0.6rem 1.05rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.82rem;
+      background: rgba(15, 23, 42, 0.02);
+      color: var(--accent-soft);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+    }
+    .hero-btn-secondary:hover {
+      background: rgba(15, 23, 42, 0.04);
+    }
+    .hero-meta-row {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .hero-meta-item {
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(248, 250, 252, 0.9);
+      border: 1px dashed rgba(209, 213, 219, 0.9);
+    }
+    .key-list {
+      list-style: none;
+      margin-top: 0.4rem;
+      display: grid;
+      gap: 0.55rem;
+    }
+    .key-item {
+      display: flex;
+      gap: 0.5rem;
+      align-items: flex-start;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .key-item-bullet {
+      margin-top: 0.25rem;
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #111827;
+    }
+    .key-item-title {
+      font-weight: 500;
+      color: #111827;
+      font-size: 0.9rem;
+    }
+    .section-list {
+      display: grid;
+      gap: 0.65rem;
+      margin-top: 0.4rem;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+    .section-label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--accent-soft);
+      margin-bottom: 0.25rem;
+    }
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.4rem;
+    }
+    .badge {
+      font-size: 0.76rem;
+      padding: 0.22rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.03);
+      border: 1px solid rgba(209, 213, 219, 0.9);
+      color: var(--accent-soft);
+    }
+    .timeline {
+      margin-top: 0.4rem;
+      border-left: 1px solid rgba(209, 213, 219, 0.9);
+      padding-left: 0.9rem;
+      display: grid;
+      gap: 0.5rem;
+      font-size: 0.84rem;
+    }
+    .timeline-item {
+      position: relative;
+    }
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -0.94rem;
+      top: 0.25rem;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #111827;
+    }
+    .timeline-label {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-soft);
+      margin-bottom: 0.08rem;
+    }
+    .footer {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0.5rem 1.25rem 2rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    .footer a {
+      color: var(--text-muted);
+    }
+    .footer a:hover {
+      color: var(--text-main);
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar-wrap">
+    <div class="navbar">
+      <div class="nav-left">
+        <div class="logo-badge">UW</div>
+        <div>
+          <div class="nav-title-main">UWONG</div>
+          <div class="nav-title-sub">University of Wong</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="#about">概况 OVERVIEW</a>
+        <a href="#academics">院系 ACADEMICS</a>
+        <a href="#admission">招生 ADMISSION</a>
+        <a href="#campus">校园 CAMPUS</a>
+      </nav>
+      <a href="#contact" class="nav-cta">
+        Apply Now
+        <span>↗</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="page-grid">
+      <section class="card" id="about">
+        <div class="hero-badge-row">
+          <div class="hero-badge-main">
+            <span class="dot"></span>
+            <span>Official Site · 学校官网</span>
+          </div>
+          <span class="pill">UWONG · University of Wong</span>
+        </div>
+
+        <h1 class="hero-title-cn">UWONG 王氏大学</h1>
+        <div class="hero-title-en">UNIVERSITY OF WONG</div>
+
+        <p class="hero-desc">
+          UWONG（University of Wong）是一所注重学术深度与现实影响力的现代大学，
+          致力于在科技、人文与社会实践之间搭建桥梁，培养能够真正改变世界格局的下一代人才。
+        </p>
+
+        <div class="hero-actions">
+          <button class="hero-btn-primary" onclick="document.getElementById('admission').scrollIntoView({behavior:'smooth'})">
+            了解招生信息
+            <span>➜</span>
+          </button>
+          <button class="hero-btn-secondary" onclick="document.getElementById('academics').scrollIntoView({behavior:'smooth'})">
+            查看院系设置
+          </button>
+        </div>
+
+        <div class="hero-meta-row">
+          <div class="hero-meta-item">综合性研究型大学</div>
+          <div class="hero-meta-item">小而精 · 高密度师生互动</div>
+          <div class="hero-meta-item">强调真实项目与跨学科合作</div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">At a Glance</div>
+            <div class="card-tagline">学校一览 · 关键信息</div>
+          </div>
+          <span class="pill">Snapshot</span>
+        </div>
+
+        <ul class="key-list">
+          <li class="key-item">
+            <span class="key-item-bullet"></span>
+            <div>
+              <div class="key-item-title">定位</div>
+              <div>专注“学术 × 实战”的综合性大学，课程设计强调项目制、工作室制与真实问题解决。</div>
+            </div>
+          </li>
+          <li class="key-item">
+            <span class="key-item-bullet"></span>
+            <div>
+              <div class="key-item-title">核心特点</div>
+              <div>小班教学、导师制、一对一学术及生涯规划，支持学生自定义学习路径与多专业交叉修读。</div>
+            </div>
+          </li>
+          <li class="key-item">
+            <span class="key-item-bullet"></span>
+            <div>
+              <div class="key-item-title">教学语言</div>
+              <div>中英双语授课，部分课程全英文授课，帮助学生无缝衔接国际学术与职业环境。</div>
+            </div>
+          </li>
+          <li class="key-item">
+            <span class="key-item-bullet"></span>
+            <div>
+              <div class="key-item-title">培养方向</div>
+              <div>鼓励学生在本科阶段完成至少一个“可被写进简历的真实项目”，包括科研、创业、
+                社会创新或跨学科作品集。</div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="card" id="academics">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Academics</div>
+            <div class="card-tagline">院系设置 · 学术体系</div>
+          </div>
+          <span class="pill">Faculty & Programs</span>
+        </div>
+
+        <div class="section-label">本科院系（示例，可自行修改）</div>
+        <div class="section-list">
+          <div>
+            <strong>1. School of Computing & Data</strong><br />
+            计算与数据学院 · 计算机科学、数据科学、人工智能、人机交互等方向，强调项目制与工程实践。
+          </div>
+          <div>
+            <strong>2. School of Business & Innovation</strong><br />
+            商业与创新学院 · 商业分析、市场营销、创业管理，支持学生从 0 到 1 搭建真实产品与品牌。
+          </div>
+          <div>
+            <strong>3. School of Arts & Design</strong><br />
+            艺术与设计学院 · 视觉传达、交互设计、时尚与空间设计，强调作品集与跨媒介创作。
+          </div>
+        </div>
+
+        <div class="badge-row">
+          <span class="badge">小班研讨 Seminar</span>
+          <span class="badge">Studio 工作室制</span>
+          <span class="badge">Capstone 毕业项目</span>
+          <span class="badge">Industry Mentors 行业导师</span>
+        </div>
+      </section>
+
+      <section class="card" id="admission">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Admission</div>
+            <div class="card-tagline">招生信息 · 申请路径</div>
+          </div>
+          <span class="pill">Apply to UWONG</span>
+        </div>
+
+        <div class="section-label">申请视角</div>
+        <div class="section-list">
+          <div>
+            <strong>更看重「你是谁」而不是「你背了多少」</strong><br />
+            UWONG 在意你的真实兴趣、项目经历、长期坚持的事情，以及你如何理解“学习”和“影响力”。
+          </div>
+          <div>
+            <strong>综合评估（Holistic Review）</strong><br />
+            成绩、语言、活动、作品集与个人陈述共同构成申请画像，欢迎具有独立思考与创造力的学生。
+          </div>
+        </div>
+
+        <div class="section-label" style="margin-top: 0.8rem;">时间线（示例）</div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-label">EARLY ROUND</div>
+            <div>10 月中 · 早申请通道建议给已经明确把 UWONG 当作首选的学生。</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-label">REGULAR ROUND</div>
+            <div>次年 1 月 · 常规申请，适合仍在完善作品集与项目经历的同学。</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="campus">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Campus Life</div>
+            <div class="card-tagline">校园生活 · 社团与文化</div>
+          </div>
+          <span class="pill">Beyond the Classroom</span>
+        </div>
+
+        <div class="section-list">
+          <div>
+            <strong>Project-driven 社团文化</strong><br />
+            支持学生自建工作室、媒体号、品牌企划、科技项目等，真正把“想法”落地成“作品”。
+          </div>
+          <div>
+            <strong>跨学科合作</strong><br />
+            计算机 + 商业 + 艺术设计学生可以组成团队，一起做游戏、App、品牌、展览等跨界项目。
+          </div>
+          <div>
+            <strong>导师开放时间</strong><br />
+            老师每周保留 Office Hour，供学生讨论课程、项目与未来发展规划。
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="contact">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Contact</div>
+            <div class="card-tagline">联系方式 · 联系 UWONG</div>
+          </div>
+          <span class="pill">Get in Touch</span>
+        </div>
+
+        <div class="section-list">
+          <div>
+            <strong>官方邮箱</strong><br />
+            admission@uwong.edu &nbsp;/&nbsp; info@uwong.edu
+          </div>
+          <div>
+            <strong>校园参观 &amp; 说明会</strong><br />
+            可通过邮件预约线下校园参观，或报名线上说明会与学长学姐 Q&amp;A。
+          </div>
+          <div>
+            <strong>友情链接</strong><br />
+            <a href="#about">学校概况</a> ·
+            <a href="#academics">院系设置</a> ·
+            <a href="#admission">招生说明</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div>© <span id="year"></span> UWONG · University of Wong. All rights reserved.</div>
+    <div>Designed as a minimal single-file mock homepage.</div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
